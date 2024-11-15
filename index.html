@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithm Visualizer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="controls">
+      <button id="createArray">Create New Array</button>
+      
+      <select id="algorithmSelect">
+        <option value="bubbleSort">Bubble Sort</option>
+        <option value="selectionSort">Selection Sort</option>
+        <option value="insertionSort">Insertion Sort</option>
+        <option value="quickSort">Quick Sort</option>
+        <option value="mergeSort">Merge Sort</option>
+      </select>
+      
+      <div class="control-group">
+          <button id="decreaseSpeed">Decrease Speed ⬇️</button>
+        <button id="increaseSpeed">Increase Speed ⬆️</button>
+      </div>
+
+      <div class="control-group">
+          <button id="decreaseSize">Decrease Size ⬇️</button>
+        <button id="increaseSize">Increase Size ⬆️</button>
+      </div>
+
+      <button id="Run">Run ▶️</button>
+      <button id="compare">Complexity Analysis 🔰</button>
+      <button id="reset">Reset 🔁</button>
+      <button id="heatMap">Show Heat-Map 📊</button>
+      <button id="shuffle">Shuffle Array 🔀</button>
+      <div class="foot">
+        Made With 💖 By Rudra~
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="chart"></canvas>
+      <div class="footer">
+        <div class="chart-label" id="arraySizeLabel">Array Size: 50</div> <!-- Label for Array Size -->
+        <div class="chart-label" id="speedLabel">Speed: 1</div> <!-- Label for Speed -->
+        <div class="chart-label" id="algoLabel">Running: BubbleSort</div> <!-- Label for Speed -->
+      </div>
+    </div>
+  </div>
+  <script type="module" src="index.js"></script>
+</body>
+</html>
