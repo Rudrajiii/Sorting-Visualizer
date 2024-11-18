@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const algoLabel = document.getElementById('algoLabel');
     const compare = document.getElementById('compare');
 
-    let speed = 1;
+    let speed = 5;
     let size = 50;
     let array = generateArray(size);
     let isRunning = false;
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     increaseSpeedBtn.addEventListener('click', () => {
-        speed = Math.min(speed + 1, 10);
+        speed = Math.min(speed + 1, 20);
         speedLabel.textContent = `Speed: ${speed}`;
     });
 
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     increaseSizeBtn.addEventListener('click', () => {
-        size = Math.min(size + 5, 100);
+        size = Math.min(size + 5, 500);
         array = generateArray(size);
         updateChartData(array);
         arraySizeLabel.textContent = `Array Size: ${size}`;
@@ -128,131 +128,190 @@ document.addEventListener('DOMContentLoaded', () => {
         return array;
     }
 
-    runBtn.addEventListener('click', () => {
+    runBtn.addEventListener('click', async () => {
         if (isRunning) return;
+        console.log("Starting sort - disabling reset button");
         isRunning = true;
-
+        resetBtn.disabled = true;  // Disable at start
+        resetBtn.style.cursor = "not-allowed";
+        shuffleBtn.disabled = true;  // Disable at start
+        shuffleBtn.style.cursor = "not-allowed";
+        createArrayBtn.disabled = true;  // Disable at start
+        createArrayBtn.style.cursor = "not-allowed";
         const selectedAlgorithm = algorithmSelect.value;
-        switch (selectedAlgorithm) {
-            case 'bubbleSort':
+        try {
+            switch (selectedAlgorithm) {
+                case 'bubbleSort':
                 bubbleSort(array);
                 break;
-            case 'selectionSort':
-                selectionSort(array);
-                algoLabel.textContent = "Running: Selection Sort";
-                break;
-            case 'insertionSort':
-                insertionSort(array);
-                algoLabel.textContent = "Running: Insertion Sort"
-                break;
-            case 'quickSort':
-                quickSort(array, 0, array.length - 1);
-                algoLabel.textContent = "Running: Quick Sort"
-                break;
-            case 'mergeSort':
-                mergeSort(array, 0, array.length - 1);
-                algoLabel.textContent = "Running: Merge Sort"
-                break;
-            default:
-                isRunning = false;
-                break;
+                case 'selectionSort':
+                    selectionSort(array);
+                    algoLabel.textContent = "Running: Selection Sort";
+                    break;
+                case 'insertionSort':
+                    insertionSort(array);
+                    algoLabel.textContent = "Running: Insertion Sort"
+                    break;
+                case 'quickSort':
+                    quickSort(array, 0, array.length - 1);
+                    algoLabel.textContent = "Running: Quick Sort"
+                    break;
+                case 'mergeSort':
+                    mergeSort(array, 0, array.length - 1);
+                    algoLabel.textContent = "Running: Merge Sort"
+                    break;
+                default:
+                    isRunning = false;
+                    resetBtn.disabled = false;
+                    resetBtn.style.cursor = "pointer";
+                    shuffleBtn.disabled = false;
+                    shuffleBtn.style.cursor = "pointer";
+                    createArrayBtn.disabled = false;  // Disable at start
+                    createArrayBtn.style.cursor = "pointer";
+                    break;
+            }
+        } catch (error) {
+            console.error("Sorting error:", error);
+            isRunning = false;
+            resetBtn.disabled = false;
+            resetBtn.style.cursor = "pointer";
+            shuffleBtn.disabled = false;
+            shuffleBtn.style.cursor = "pointer";
+            createArrayBtn.disabled = false;  // Disable at start
+            createArrayBtn.style.cursor = "pointer";
         }
     });
 
     function bubbleSort(array) {
-        let n = array.length;
-        let i = 0, j = 0;
+        return new Promise((resolve) => {
+            let n = array.length;
+            let i = 0, j = 0;
 
-        let interval = setInterval(() => {
-            if (i < n - 1) {
-                if (j < n - i - 1) {
-                    if (array[j] > array[j + 1]) {
-                        [array[j], array[j + 1]] = [array[j + 1], array[j]];
+            let interval = setInterval(() => {
+                if (i < n - 1) {
+                    if (j < n - i - 1) {
+                        if (array[j] > array[j + 1]) {
+                            [array[j], array[j + 1]] = [array[j + 1], array[j]];
+                        }
+                        updateChartData(array, [j, j + 1]);
+                        j++;
+                    } else {
+                        j = 0;
+                        i++;
                     }
-                    updateChartData(array, [j, j + 1]);
-                    j++;
                 } else {
-                    j = 0;
-                    i++;
+                    clearInterval(interval);
+                    setAllColor('#66BB6A');
+                    isRunning = false;
+                    resetBtn.disabled = false;
+                    resetBtn.style.cursor = "pointer";
+                    shuffleBtn.disabled = false;
+                    shuffleBtn.style.cursor = "pointer";
+                    createArrayBtn.disabled = false;  // Disable at start
+                    createArrayBtn.style.cursor = "pointer";
+                    console.log("Bubble sort complete - enabling reset button");
+                    resolve();
                 }
-            } else {
-                clearInterval(interval);
-                setAllColor('#66BB6A');
-                isRunning = false;
-            }
-        }, 1000 / speed);
-    }
-
-    function selectionSort(array) {
-        let n = array.length;
-        let i = 0, j = i + 1, minIndex = 0;
-
-        let interval = setInterval(() => {
-            if (i < n - 1) {
-                if (j < n) {
-                    if (array[j] < array[minIndex]) {
-                        minIndex = j;
-                    }
-                    updateChartData(array, [j, minIndex]);
-                    j++;
-                } else {
-                    if (minIndex !== i) {
-                        [array[i], array[minIndex]] = [array[minIndex], array[i]];
-                    }
-                    setColor(i, '#66BB6A');
-                    i++;
-                    j = i + 1;
-                    minIndex = i;
-                }
-            } else {
-                clearInterval(interval);
-                setAllColor('#66BB6A');
-                isRunning = false;
-            }
-        }, 1000 / speed);
-    }
-
-    function insertionSort(array) {
-        let n = array.length;
-        let i = 1, j = 0;
-
-        let interval = setInterval(() => {
-            if (i < n) {
-                let key = array[i];
-                j = i - 1;
-                while (j >= 0 && array[j] > key) {
-                    array[j + 1] = array[j];
-                    j--;
-                }
-                array[j + 1] = key;
-                updateChartData(array, [i, j + 1]);
-                setColor(i, '#66BB6A');
-                i++;
-            } else {
-                clearInterval(interval);
-                setAllColor('#66BB6A');
-                isRunning = false;
-            }
-        }, 1000 / speed);
+            }, 1000 / speed);
+        });
     }
     function delay(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
-    
+    function selectionSort(array) {
+        return new Promise((resolve) => {
+            let n = array.length;
+            let i = 0, j = i + 1, minIndex = 0;
+
+            let interval = setInterval(() => {
+                if (i < n - 1) {
+                    if (j < n) {
+                        if (array[j] < array[minIndex]) {
+                            minIndex = j;
+                        }
+                        updateChartData(array, [j, minIndex]);
+                        j++;
+                    } else {
+                        if (minIndex !== i) {
+                            [array[i], array[minIndex]] = [array[minIndex], array[i]];
+                        }
+                        setColor(i, '#66BB6A');
+                        i++;
+                        j = i + 1;
+                        minIndex = i;
+                    }
+                } else {
+                    clearInterval(interval);
+                    setAllColor('#66BB6A');
+                    isRunning = false;
+                    resetBtn.disabled = false;
+                    resetBtn.style.cursor = "pointer";
+                    shuffleBtn.disabled = false;
+                    shuffleBtn.style.cursor = "pointer";
+                    createArrayBtn.disabled = false;  // Disable at start
+                    createArrayBtn.style.cursor = "pointer";
+                    console.log("Selection sort complete - enabling reset button");
+                    resolve();
+                }
+            }, 1000 / speed);
+        });
+    }
+
+    function insertionSort(array) {
+        return new Promise((resolve) => {
+            let n = array.length;
+            let i = 1;
+
+            let interval = setInterval(() => {
+                if (i < n) {
+                    let key = array[i];
+                    let j = i - 1;
+                    while (j >= 0 && array[j] > key) {
+                        array[j + 1] = array[j];
+                        j--;
+                    }
+                    array[j + 1] = key;
+                    updateChartData(array, [i, j + 1]);
+                    setColor(i, '#66BB6A');
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    setAllColor('#66BB6A');
+                    isRunning = false;
+                    resetBtn.disabled = false;
+                    resetBtn.style.cursor = "pointer";
+                    shuffleBtn.disabled = false;
+                    shuffleBtn.style.cursor = "pointer";
+                    createArrayBtn.disabled = false;  // Disable at start
+                    createArrayBtn.style.cursor = "pointer";
+                    console.log("Insertion sort complete - enabling reset button");
+                    resolve();
+                }
+            }, 1000 / speed);
+        });
+    }
+
     async function quickSort(array, left, right) {
         if (left < right) {
-            let pivotIndex = await partition(array, left, right); // Wait for the partition to complete
-            updateChartData(array, [pivotIndex]); // Highlight the pivot element
-            await quickSort(array, left, pivotIndex - 1); // Wait for the left part to be sorted
-            await quickSort(array, pivotIndex + 1, right); // Wait for the right part to be sorted
+            let pivotIndex = await partition(array, left, right);
+            updateChartData(array, [pivotIndex]);
+            await quickSort(array, left, pivotIndex - 1);
+            await quickSort(array, pivotIndex + 1, right);
         }
-    
+
         if (left === 0 && right === array.length - 1) {
-            setAllColor('#66BB6A'); // Mark the entire array as sorted
+            setAllColor('#66BB6A');
             isRunning = false;
+            resetBtn.disabled = false;
+            resetBtn.style.cursor = "pointer";
+            shuffleBtn.disabled = false;
+            shuffleBtn.style.cursor = "pointer";
+            createArrayBtn.disabled = false;  // Disable at start
+            createArrayBtn.style.cursor = "pointer";
+            console.log("Quick sort complete - enabling reset button");
         }
     }
-    
+
     async function partition(array, left, right) {
         let pivot = array[right];
         let i = left - 1;
@@ -270,20 +329,25 @@ document.addEventListener('DOMContentLoaded', () => {
         await delay(1000 / speed); // Add delay for visualization
         return i + 1;
     }
-    
 
     async function mergeSort(array, left, right) {
         if (left < right) {
             let mid = Math.floor((left + right) / 2);
-    
-            await mergeSort(array, left, mid); // Wait for the left half to be sorted
-            await mergeSort(array, mid + 1, right); // Wait for the right half to be sorted
-            await merge(array, left, mid, right); // Merge both halves
+            await mergeSort(array, left, mid);
+            await mergeSort(array, mid + 1, right);
+            await merge(array, left, mid, right);
         }
-    
+
         if (left === 0 && right === array.length - 1) {
-            setAllColor('#66BB6A'); // Mark the entire array as sorted
+            setAllColor('#66BB6A');
             isRunning = false;
+            resetBtn.disabled = false;
+            resetBtn.style.cursor = "pointer";
+            shuffleBtn.disabled = false;
+            shuffleBtn.style.cursor = "pointer";
+            createArrayBtn.disabled = false;  // Disable at start
+            createArrayBtn.style.cursor = "pointer";
+            console.log("Merge sort complete - enabling reset button");
         }
     }
     
