@@ -1,4 +1,4 @@
-import { updateChart_Data } from './update_chart.js';
+import { updateChart_Data } from '../Operations/updateChart.js';
 const delayFactors = {
     bubbleSort: 1,  // Base delay factor
     selectionSort: 1,  // Base delay factor

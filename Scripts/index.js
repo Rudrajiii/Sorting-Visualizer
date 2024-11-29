@@ -1,8 +1,8 @@
-import { generateBarGraph } from './bar_array.js';
-import { updateChart_Data } from './update_chart.js';
-import { showCardPopup } from './card.js';
-import { createChart } from './canvas/main_canvas.js';
-import { _bubbleSort , _insertionSort , _mergeSort , _quickSort , _selectionSort } from './algo.js';
+import { generateBarGraph } from '../Operations/generatedCanvasFunc.js';
+import { updateChart_Data } from '../Operations/updateChart.js';
+import { showCardPopup } from '../Components/popupCard.js';
+import { createChart } from '../canvas/main_canvas.js';
+import { _bubbleSort , _insertionSort , _mergeSort , _quickSort , _selectionSort } from '../Algorithms/algo.js';
 document.addEventListener('DOMContentLoaded', () => {
     const increaseSpeedBtn = document.getElementById('increaseSpeed');
     const decreaseSpeedBtn = document.getElementById('decreaseSpeed');
@@ -533,6 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     compare_run.addEventListener('click', async () => {
+
         console.log('s:',isRunning_in_Comparision_mode);
         if(isRunning_in_Comparision_mode) return;
         isRunning_in_Comparision_mode = true;
@@ -556,6 +557,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     
         const selectedAlgorithms = JSON.parse(localStorage.getItem("selectedAlgorithms"));
+        if (!selectedAlgorithms || selectedAlgorithms.length < 2) {
+            alert("Please select at least two sorting algorithms.");
+            isRunning_in_Comparision_mode = false;
+            return;
+        }
         const [algorithm1, algorithm2] = selectedAlgorithms;
     
         if (!algorithm1 || !algorithm2) {
