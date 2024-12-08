@@ -1,5 +1,5 @@
+const algoLabel = document.getElementById('algoLabel');
 function showCardPopup() {
-    // Array of sorting algorithms
     const algorithms = [
         "Bubble Sort",
         "Merge Sort",
@@ -9,7 +9,6 @@ function showCardPopup() {
         "Heap Sort",
     ];
 
-    // Create a modal wrapper
     const modal = document.createElement("div");
     modal.style.position = "fixed";
     modal.style.top = "0";
@@ -185,7 +184,8 @@ function showCardPopup() {
 
         if (selectedAlgorithms.length === 2) {
             localStorage.setItem("selectedAlgorithms", JSON.stringify(selectedAlgorithms));
-            console.log(`Saved: ${selectedAlgorithms.join(", ")}`);
+            algoLabel.textContent = `Selected Algo's: ${selectedAlgorithms.join(" ")}`;
+            console.log(`Saved: ${selectedAlgorithms.join(" ")}`);
             // Add an animation class to the modal
             const card = document.querySelector('.card');
             card.classList.add('fade-out');

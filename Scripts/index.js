@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     compare.addEventListener('click', () => {
         showCardPopup();
-        console.log("compare :- ",isHeatMapEnable);
+        console.log("compare : ",isHeatMapEnable);
         heatMapBtn.textContent = isHeatMapEnable ? "Hide Heat-Map 📊" : "Show Heat-Map 📊";
         if (!document.getElementById("additionalCanvas1") && !document.getElementById("additionalCanvas2")) {
             const defaultCanvas = document.getElementById("chart");
@@ -547,6 +547,9 @@ document.addEventListener('DOMContentLoaded', () => {
         createArrayBtn.style.cursor = "not-allowed";
         runBtn.disabled = true;
         runBtn.style.cursor = "not-allowed";
+        compare.disabled = true;
+        compare.style.cursor = "not-allowed";
+
         console.log("compareKr :- ",isHeatMapEnable);
         const algos = {
             "Bubble Sort": "bubbleSort",
@@ -574,12 +577,15 @@ document.addEventListener('DOMContentLoaded', () => {
             createArrayBtn.style.cursor = "pointer";
             runBtn.disabled = false;
             runBtn.style.cursor = "pointer";
+            compare.disabled = false;
+            compare.style.cursor = "pointer";
             
             isRunning_in_Comparision_mode = false;
             return;
         }
     
         console.log("Selected algorithms:", algorithm1, algorithm2);
+        algoLabel.textContent = `Running - ${algorithm1} Vs ${algorithm2}`
     
         // creates independent copies of the array
         const array1 = [...array];
@@ -605,6 +611,8 @@ document.addEventListener('DOMContentLoaded', () => {
             createArrayBtn.style.cursor = "pointer";
             runBtn.disabled = false;
             runBtn.style.cursor = "pointer";
+            compare.disabled = false;
+            compare.style.cursor = "pointer";
             isRunning_in_Comparision_mode = false;
         }
         console.log("Final sorted arrays:", array1, array2);
