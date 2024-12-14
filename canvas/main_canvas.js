@@ -1,5 +1,5 @@
 function createChart(chartContainer, array) {
-    const ctx = chartContainer.getContext('2d');
+    const ctx = chartContainer.getContext('2d'); 
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -17,7 +17,10 @@ function createChart(chartContainer, array) {
                 x: { display: false },
                 y: {
                     beginAtZero: true,
-                    ticks: { stepSize: 10, callback: (value) => value },
+                    ticks: { 
+                        stepSize: 10, 
+                        callback: (value) => value 
+                    },
                 },
             },
         },

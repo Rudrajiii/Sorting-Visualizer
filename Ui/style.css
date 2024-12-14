@@ -162,7 +162,7 @@
   
     .controls button,
     .controls select {
-      font-size: 14px;
+      font-size: 14px !important;
       padding: 8px;
       text-align: center;
     }
@@ -214,7 +214,7 @@
   
     .controls button,
     .controls select {
-      font-size: 12px;
+      font-size: 12px !important;
       padding: 6px;
     }
   
