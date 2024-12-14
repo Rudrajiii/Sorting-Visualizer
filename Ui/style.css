@@ -142,3 +142,112 @@
     place-items: center;
   }
 
+  @media (max-width: 1000px) {
+    .container {
+      flex-direction: column;
+      align-items: center;
+      padding: 5px;
+    }
+  
+    .controls {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 10px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Distribute buttons evenly */
+      gap: 10px;
+      height: auto;
+    }
+  
+    .controls button,
+    .controls select {
+      font-size: 14px;
+      padding: 8px;
+      text-align: center;
+    }
+  
+    .control-group {
+      grid-column: span 2; /* Allows grouped controls to span wider space */
+      display: flex;
+      justify-content: space-between;
+      gap: 5px;
+    }
+  
+    .chart-container {
+      width: 100%;
+      height: calc(100vh - 150px); /* Adjust height dynamically based on viewport, minus controls height */
+      overflow: hidden; /* Prevent white space below */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    canvas {
+      width: 100% !important;
+      height: 100% !important; /* Ensure canvas fills the available height */
+    }
+  
+    .chart-label {
+      font-size: 12px;
+    }
+  
+    .footer {
+      flex-direction: row;
+      gap: 10px;
+    }
+  
+    .foot {
+      font-size: 12px;
+      text-align: center;
+      padding: 5px;
+      display: none;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .controls {
+      grid-template-columns: 1fr; /* Stack all buttons in a single column */
+      gap: 8px;
+      padding: 5px;
+    }
+  
+    .controls button,
+    .controls select {
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    .control-group {
+      flex-direction: column; /* Stack the grouped buttons vertically */
+      gap: 5px;
+    }
+  
+    .chart-container {
+      width: 100%;
+      height: calc(100vh - 120px); /* Dynamically adjust height, accounting for controls and padding */
+      overflow: hidden; /* Prevent white space below */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    canvas {
+      width: 100% !important;
+      height: 100% !important; /* Ensure canvas fills the available height */
+    }
+  
+    .chart-label {
+      font-size: 10px;
+    }
+  
+    .footer {
+      font-size: 10px;
+      gap: 5px;
+    }
+  
+    .foot {
+      font-size: 10px;
+      padding: 5px;
+    }
+  }
