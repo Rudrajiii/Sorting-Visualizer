@@ -219,8 +219,11 @@
     }
   
     .control-group {
-      flex-direction: column; /* Stack the grouped buttons vertically */
+      /* flex-direction: column; Stack the grouped buttons vertically */
       gap: 5px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
     }
   
     .chart-container {
