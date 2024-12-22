@@ -14,14 +14,19 @@ function createChart(chartContainer, array) {
         },
         options: {
             scales: {
-                x: { display: false },
+                x: { 
+                    display: false,
+                    
+                },
                 y: {
                     beginAtZero: true,
                     ticks: { 
                         stepSize: 10, 
                         callback: (value) => value 
                     },
+                    
                 },
+                
             },
         },
     });

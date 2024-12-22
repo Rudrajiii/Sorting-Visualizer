@@ -131,6 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
         shuffleBtn.style.cursor = "not-allowed";
         createArrayBtn.disabled = true;  // Disable at start
         createArrayBtn.style.cursor = "not-allowed";
+        compare.disabled = true;  // Disable at start
+        compare.style.cursor = "not-allowed";
+        compare_run.disabled = true;  // Disable at start
+        compare_run.style.cursor = "not-allowed";
         const selectedAlgorithm = algorithmSelect.value;
         try {
             switch (selectedAlgorithm) {
@@ -161,6 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     shuffleBtn.style.cursor = "pointer";
                     createArrayBtn.disabled = false;  // Disable at start
                     createArrayBtn.style.cursor = "pointer";
+                    compare.disabled = false;  // Disable at start
+                    compare.style.cursor = "pointer";
+                    compare_run.disabled = false;  // Disable at start
+                    compare_run.style.cursor = "pointer";
                     break;
             }
         } catch (error) {
@@ -172,6 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
             shuffleBtn.style.cursor = "pointer";
             createArrayBtn.disabled = false;  // Disable at start
             createArrayBtn.style.cursor = "pointer";
+            compare.disabled = false;  // Disable at start
+            compare.style.cursor = "pointer";
+            compare_run.disabled = false;  // Disable at start
+            compare_run.style.cursor = "pointer";
         }
     });
     const delayFactors = {
@@ -213,6 +225,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     shuffleBtn.style.cursor = "pointer";
                     createArrayBtn.disabled = false;  // Disable at start
                     createArrayBtn.style.cursor = "pointer";
+                    compare.disabled = false;  // Disable at start
+                    compare.style.cursor = "pointer";
+                    compare_run.disabled = false;  // Disable at start
+                    compare_run.style.cursor = "pointer";
                     console.log("Bubble sort complete - enabling reset button");
                     resolve();
                 }
@@ -251,6 +267,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     shuffleBtn.style.cursor = "pointer";
                     createArrayBtn.disabled = false;  // Disable at start
                     createArrayBtn.style.cursor = "pointer";
+                    compare.disabled = false;  // Disable at start
+                    compare.style.cursor = "pointer";
+                    compare_run.disabled = false;  // Disable at start
+                    compare_run.style.cursor = "pointer";
                     console.log("Selection sort complete - enabling reset button");
                     resolve();
                 }
@@ -285,6 +305,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     shuffleBtn.style.cursor = "pointer";
                     createArrayBtn.disabled = false;  // Disable at start
                     createArrayBtn.style.cursor = "pointer";
+                    compare.disabled = false;  // Disable at start
+                    compare.style.cursor = "pointer";
+                    compare_run.disabled = false;  // Disable at start
+                    compare_run.style.cursor = "pointer";
                     console.log("Insertion sort complete - enabling reset button");
                     resolve();
                 }
@@ -309,6 +333,10 @@ document.addEventListener('DOMContentLoaded', () => {
             shuffleBtn.style.cursor = "pointer";
             createArrayBtn.disabled = false;  // Disable at start
             createArrayBtn.style.cursor = "pointer";
+            compare.disabled = false;  // Disable at start
+            compare.style.cursor = "pointer";
+            compare_run.disabled = false;  // Disable at start
+            compare_run.style.cursor = "pointer";
             console.log("Quick sort complete - enabling reset button");
         }
     }
@@ -348,6 +376,10 @@ document.addEventListener('DOMContentLoaded', () => {
             shuffleBtn.style.cursor = "pointer";
             createArrayBtn.disabled = false;  // Disable at start
             createArrayBtn.style.cursor = "pointer";
+            compare.disabled = false;  // Disable at start
+            compare.style.cursor = "pointer";
+            compare_run.disabled = false;  // Disable at start
+            compare_run.style.cursor = "pointer";
             console.log("Merge sort complete - enabling reset button");
         }
     }
