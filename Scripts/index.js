@@ -120,8 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     runBtn.addEventListener('click', async () => {
         if (isRunning) return;
-        const selectedAlgorithms = JSON.parse(localStorage.getItem("selectedAlgorithms"));
-        const [algorithm1, algorithm2] = selectedAlgorithms;
+        // const selectedAlgorithms = JSON.parse(localStorage.getItem("selectedAlgorithms"));
+        // const [algorithm1, algorithm2] = selectedAlgorithms;
+
+        //adding a checkbar if it is not found in localStorage
+        const selectedAlgorithms = JSON.parse(localStorage.getItem("selectedAlgorithms")) || [];
+        const [algorithm1, algorithm2] = selectedAlgorithms.length ? selectedAlgorithms : [null, null];
+        
         console.log(algorithm1, algorithm2)
         console.log("Starting sort - disabling reset button");
         isRunning = true;
